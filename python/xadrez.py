@@ -1,5 +1,6 @@
 import chess
 import reconhecimento as r
+import playsound as ps
 
 
 def print_board(board):
