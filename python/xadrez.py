@@ -1,5 +1,4 @@
 import chess
-import speech_recognition as sr
 import reconhecimento as r
 
 
