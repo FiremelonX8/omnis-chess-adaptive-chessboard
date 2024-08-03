@@ -16,7 +16,8 @@ class Reconhecimento:
             print('Não foi possível reconhecer a jogada! Repita')
         except sr.UnknownValueError:
             print('Não foi possível reconhecer a jogada! Repita')
-        return self.jogada_f
+        sfor_cform = [jogada, self.jogada_f]
+        return sfor_cform
 
     def reconhecer_audio(self):
         while True:
@@ -33,5 +34,5 @@ class Reconhecimento:
                         audio_jogada, language='pt-BR').lower()
                     print(jogada)
                     self.jogada_f = self.validar_jogada(jogada)
-                    print(self.jogada_f)
+                    print(self.jogada_f[0], self.jogada_f[1])
                     return self.jogada_f
