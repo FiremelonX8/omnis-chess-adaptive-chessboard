@@ -1,0 +1,52 @@
+import pyaudio
+import wave
+import string
+
+# Parâmetros da gravação
+fs = 16000  # Taxa de amostragem
+duration = 2  # Duração em segundos
+channels = 1  # Mono
+frames_per_buffer = 1024  # Tamanho do buffer
+format = pyaudio.paInt16  # Formato de áudio: 16 bits
+
+# Função para gravar áudio
+def gravar_audio(file_name, duration, fs):
+    p = pyaudio.PyAudio()
+    
+    # Abrir stream para gravação
+    stream = p.open(format=format,
+                    channels=channels,
+                    rate=fs,
+                    input=True,
+                    input_device_index= 1,
+                    frames_per_buffer=frames_per_buffer)
+
+    print("Gravando...")
+
+    frames = []
+
+    # Gravar áudio por 'duration' segundos
+    for _ in range(0, int(fs / frames_per_buffer * duration)):
+        data = stream.read(frames_per_buffer)
+        frames.append(data)
+
+    print("Gravação terminada.")
+
+    # Fechar stream e PyAudio
+    stream.stop_stream()
+    stream.close()
+    p.terminate()
+
+    # Salvar em um arquivo WAV
+    with wave.open(file_name, 'wb') as wf:
+        wf.setnchannels(channels)
+        wf.setsampwidth(p.get_sample_size(format))
+        wf.setframerate(fs)
+        wf.writeframes(b''.join(frames))
+alphabet = list(string.ascii_uppercase[:8])
+for i in range(16):
+    x = 0
+    # Gravar áudio com duração definida
+    if i > 7:
+        x = alphabet[i-8]
+    gravar_audio("{x}.wav", duration, fs)
