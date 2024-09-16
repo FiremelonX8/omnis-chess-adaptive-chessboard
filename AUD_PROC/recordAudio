@@ -4,7 +4,7 @@ import string
 
 # Parâmetros da gravação
 fs = 16000  # Taxa de amostragem
-duration = 2  # Duração em segundos
+duration = 1.5  # Duração em segundos
 channels = 1  # Mono
 frames_per_buffer = 1024  # Tamanho do buffer
 format = pyaudio.paInt16  # Formato de áudio: 16 bits
@@ -18,10 +18,10 @@ def gravar_audio(file_name, duration, fs):
                     channels=channels,
                     rate=fs,
                     input=True,
-                    input_device_index= 1,
+                    input_device_index=1,  # Substitua pelo índice correto do microfone
                     frames_per_buffer=frames_per_buffer)
 
-    print("Gravando...")
+    print(f"Gravando {file_name}...")
 
     frames = []
 
@@ -30,7 +30,7 @@ def gravar_audio(file_name, duration, fs):
         data = stream.read(frames_per_buffer)
         frames.append(data)
 
-    print("Gravação terminada.")
+    print(f"Gravação {file_name} terminada.")
 
     # Fechar stream e PyAudio
     stream.stop_stream()
@@ -43,10 +43,12 @@ def gravar_audio(file_name, duration, fs):
         wf.setsampwidth(p.get_sample_size(format))
         wf.setframerate(fs)
         wf.writeframes(b''.join(frames))
+
+# Lista de alfabetos A-H, seguido de números 1-2 para gerar 16 nomes únicos
 alphabet = list(string.ascii_uppercase[:8])
-for i in range(16):
-    x = 0
-    # Gravar áudio com duração definida
-    if i > 7:
-        x = alphabet[i-8]
-    gravar_audio("{x}.wav", duration, fs)
+
+# Repetir a gravação 16 vezes
+for i, letter in enumerate(alphabet):
+    for j in range(1, 9):  # Gera 1 e 2 para cada letra
+        file_name = f"{letter}{j}.wav"  # Nome do arquivo: A1.wav, A2.wav, B1.wav, ..., H2.wav
+        gravar_audio(file_name, duration, fs)
