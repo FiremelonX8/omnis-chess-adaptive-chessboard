@@ -1,5 +1,8 @@
 import wave as wv
 import string
+
+#DISCARDED IN ORDER TO OPTMIZE THE PROGRAM WITH LIGHTER FILES
+
 op = input("squares-1 or notation-2?")
 if op == 1:
 
