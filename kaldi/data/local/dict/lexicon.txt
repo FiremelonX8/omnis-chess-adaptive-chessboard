@@ -1,64 +1,71 @@
-A1 A1
-A2 A2
-A3 A3
-A4 A4
-A5 A5
-A6 A6
-A7 A7
-A8 A8
-B1 B1
-B2 B2
-B3 B3
-B4 B4
-B5 B5
-B6 B6
-B7 B7
-B8 B8
-C1 C1
-C2 C2
-C3 C3
-C4 C4
-C5 C5
-C6 C6
-C7 C7
-C8 C8
-D1 D1
-D2 D2
-D3 D3
-D4 D4
-D5 D5
-D6 D6
-D7 D7
-D8 D8
-E1 E1
-E2 E2
-E3 E3
-E4 E4
-E5 E5
-E6 E6
-E7 E7
-E8 E8
-F1 F1
-F2 F2
-F3 F3
-F4 F4
-F5 F5
-F6 F6
-F7 F7
-F8 F8
-G1 G1
-G2 G2
-G3 G3
-G4 G4
-G5 G5
-G6 G6
-G7 G7
-G8 G8
-H1 H1
-H2 H2
-H3 H3
-H4 H4
-H5 H5
-H6 agá s e i s
-H7 agá sete
-H8 agá oito
+A1 a w ũ
+A2 a d o i s
+A3 a t r ɛ s
+A4 a k w a t r o
+A5 a s ĩ k ũ
+A6 a s ɛ i s
+A7 a s ɛ t ʃ i
+A8 a o i t u
+
+B1 b w ũ
+B2 b d o i s
+B3 b t r ɛ s
+B4 b k w a t r o
+B5 b s ĩ k ũ
+B6 b s ɛ i s
+B7 b s ɛ t ʃ i
+B8 b o i t u
+
+C1 s e w ũ
+C2 s e d o i s
+C3 s e t r ɛ s
+C4 s e k w a t r o
+C5 s e s ĩ k ũ
+C6 s e s ɛ i s
+C7 s e s ɛ t ʃ i
+C8 s e o i t u
+
+D1 d e w ũ
+D2 d e d o i s
+D3 d e t r ɛ s
+D4 d e k w a t r o
+D5 d e s ĩ k ũ
+D6 d e s ɛ i s
+D7 d e s ɛ t ʃ i
+D8 d e o i t u
+
+E1 e w ũ
+E2 e d o i s
+E3 e t r ɛ s
+E4 e k w a t r o
+E5 e s ĩ k ũ
+E6 e s ɛ i s
+E7 e s ɛ t ʃ i
+E8 e o i t u
+
+F1 ɛ f i w ũ
+F2 ɛ f i d o i s
+F3 ɛ f i t r ɛ s
+F4 ɛ f i k w a t r o
+F5 ɛ f i s ĩ k ũ
+F6 ɛ f i s ɛ i s
+F7 ɛ f i s ɛ t ʃ i
+F8 ɛ f i o i t u
+
+G1 ʒ i w ũ
+G2 ʒ i d o i s
+G3 ʒ i t r ɛ s
+G4 ʒ i k w a t r o
+G5 ʒ i s ĩ k ũ
+G6 ʒ i s ɛ i s
+G7 ʒ i s ɛ t ʃ i
+G8 ʒ i o i t u
+
+H1 aʃ i w ũ
+H2 aʃ i d o i s
+H3 aʃ i t r ɛ s
+H4 aʃ i k w a t r o
+H5 aʃ i s ĩ k ũ
+H6 aʃ i s ɛ i s
+H7 aʃ i s ɛ t ʃ i
+H8 aʃ i o i t u
