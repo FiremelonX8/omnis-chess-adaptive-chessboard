@@ -43,12 +43,12 @@ def main():
         move = move1 + move2
         move = bestCorrespond(move, targetCoord)[0]
         print(move)
-        print(f"{move} é o movimento desejado? (sim ou não)")
+        '''print(f"{move} é o movimento desejado? (sim ou não)")
 
         keyValid = rec1.reconhecerAudio()
         if keyValid == "não":
             pass #função para voltar e reconhecer novamente
-        # print(rec1.jogada_f)
+        # print(rec1.jogada_f)'''
         try:
             print(board)
             board.push_uci(move)
