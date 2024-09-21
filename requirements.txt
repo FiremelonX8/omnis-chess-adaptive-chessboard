@@ -1,0 +1,8 @@
+fuzzywuzzy
+python-chess
+vosk
+speechrecognition
+playsound
+pyaudio
+queue
+json
