@@ -1,5 +1,5 @@
 import speech_recognition as sr
-
+import vosk
 
 class Reconhecimento:
     def __init__(self):
