@@ -3,43 +3,43 @@ import pyaudio
 import queue
 import json
 
-model = vk.Model("C:/Users/filip/OneDrive/Documents/GitHub/omnis_chess/testeVOSK/vosk-model-small-pt-0.3")
-audioQueue = queue.Queue()
-
-HZ = 16000 #samplerate - this model works in 16000 hertz
-DEVICE = 1 #audio DEVICE index
-CHUNK_SIZE = 64000 #audio block size
-CHANNELS = 1 #mono audio
-
-p = pyaudio.PyAudio()
-
-stream = p.open(format=pyaudio.paInt16,
-                 channels=CHANNELS,
-                 rate=HZ,
+class Reconhecimento:
+    def __init__(self):
+        self.audioQueue = queue.Queue()
+        self.model = vk.Model("py_offline/vosk_model_peq")
+        self.HZ = 16000
+        self.DEVICE = 1
+        self.CHUNK_SIZE = 80000
+        self.CHANNELS = 1
+        self.recognizer = vk.KaldiRecognizer(self.model, self.HZ)
+        self.p = pyaudio.PyAudio()
+        self.stream = self.p.open(format=pyaudio.paInt16,
+                 channels=self.CHANNELS,
+                 rate=self.HZ,
                  input=True,
-                 frames_per_buffer=CHUNK_SIZE)
+                 frames_per_buffer=self.CHUNK_SIZE)
+        self.res = None
 
-def rec():
-    recognizer = vk.KaldiRecognizer(model, HZ)
+    def reconhecer(self):
+        r = False
+        recognizer = vk.KaldiRecognizer(self.model, self.HZ)
+        while r == False:
+            print("Falar")
+            data = self.stream.read(self.CHUNK_SIZE, exception_on_overflow=False)
+            self.audioQueue.put(data)
+            if self.recognizer.AcceptWaveform(data):
+                self.res = json.loads(self.recognizer.Result())
+                print(self.res.get("text", ""))
+                r = True
+                self.stream.stop_stream
+                self.stream.close()
+                self.p.terminate()
+                return self.res.get("text", "")
 
-    print("Fale")
-
-    while True:
-        data = stream.read(CHUNK_SIZE, exception_on_overflow=False)
-        audioQueue.put(data)
-        
-        if recognizer.AcceptWaveform(data):
-            res = json.loads(recognizer.Result())
-            print(res.get("text", ""))
-        else:
-            print("partial result:", json.loads(recognizer.PartialResult()).get("partial", ""))
+rec1 = Reconhecimento()
 
 if __name__ == "__main__":
     try:
-        rec()
+        rec1.reconhecer()
     except KeyboardInterrupt:
-        print("rec interrompido")
-    finally:
-        stream.stop_stream()
-        stream.close()
-        p.terminate()
+        print("reconhecimento interrompido")
