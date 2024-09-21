@@ -1,6 +1,5 @@
 import speech_recognition as sr
 
-
 class Reconhecimento:
     def __init__(self):
         self.rec = sr.Recognizer()
@@ -19,7 +18,7 @@ class Reconhecimento:
         sfor_cform = [jogada, self.jogada_f]
         return sfor_cform
 
-    def reconhecer_audio(self):
+    def reconhecerJogada(self):
         while True:
             with sr.Microphone() as mic:
                 self.rec.adjust_for_ambient_noise(mic)
@@ -36,3 +35,10 @@ class Reconhecimento:
                     self.jogada_f = self.validar_jogada(jogada)
                     print(self.jogada_f[0], self.jogada_f[1])
                     return self.jogada_f
+                
+    def reconhecerAudio(self):
+        with sr.Microphone() as mic:
+            self.rec.adjust_for_ambient_noise(mic)
+            audio = self.rec.listen(mic)
+            frase = self.rec.recognize_google(audio, language='pt-BR').lower()
+            return frase

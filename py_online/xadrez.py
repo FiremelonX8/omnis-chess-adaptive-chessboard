@@ -1,16 +1,17 @@
 import chess
 import reconhecimento as r
 import playsound as ps
-import fuzzywuzzy as fw
+from fuzzywuzzy import fuzz
+
 
 def print_board(board):
     print(board)
 
-def melhor_correspond(move, target_coordinates):
+def bestCorrespond(move, targetCoord):
     best_match = None
     highest_ratio = 0
-    for coord in target_coordinates:
-        ratio = fw.ratio(move.lower(), coord)
+    for coord in targetCoord:
+        ratio = fuzz.ratio(move.lower(), coord)
         if ratio > highest_ratio:
             highest_ratio = ratio
             best_match = coord
@@ -31,17 +32,24 @@ def main():
         #move = input("Enter your move in UCI format (e.g., e2e4): ")
         letras = 'abcdefgh'
         numeros = '12345678'
-        target_coordinates = [f"{letter1}{number1}{letter2}{number2}" for letter1 in letras for number1 in numeros for letter2 in letras for number2 in numeros]
+        targetCoord = [f"{letter1}{number1}{letter2}{number2}" for letter1 in letras for number1 in numeros for letter2 in letras for number2 in numeros]
         #defines move as user's audio
-        moves = rec1.reconhecer_audio()
+        moves = rec1.reconhecerJogada()
         move1 = moves[0][0]
         move2 = moves[0][1]
-        move1 = melhor_correspond(move1, target_coordinates)
-        move2 = melhor_correspond(move2, target_coordinates)
+        '''if move1 not in targetCoord or move2 not in targetCoord:
+            move1 = bestCorrespond(move1, targetCoord)
+            move2 = bestCorrespond(move2, targetCoord)'''
         move = move1 + move2
-
+        move = bestCorrespond(move, targetCoord)[0]
+        print(move)
+        print(f"{move} é o movimento desejado? (sim ou não)")
+        keyValid = rec1.reconhecerAudio()
+        if keyValid == "não":
+            pass #função para voltar e reconhecer novamente
         # print(rec1.jogada_f)
         try:
+            print(board)
             board.push_uci(move)
         except ValueError:
             print("Invalid move format or illegal move. Try again.")
