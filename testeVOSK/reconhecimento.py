@@ -25,12 +25,12 @@ class Reconhecimento:
                 self.rec.adjust_for_ambient_noise(mic)
                 print('Falar')
                 audio = self.rec.listen(mic)
-                frase = self.rec.recognize_google(
+                frase = self.rec.recognize_vosk(
                     audio, language='pt-BR').lower()
                 if frase == 'jogar':
                     print('Jogando')
                     audio_jogada = self.rec.listen(mic)
-                    jogada = self.rec.recognize_google(
+                    jogada = self.rec.recognize_vosk(
                         audio_jogada, language='pt-BR').lower()
                     print(jogada)
                     self.jogada_f = self.validar_jogada(jogada)
