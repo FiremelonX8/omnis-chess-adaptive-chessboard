@@ -35,11 +35,3 @@ class Reconhecimento:
                 self.stream.close()
                 self.p.terminate()
                 return self.res.get("text", "")
-
-rec1 = Reconhecimento()
-
-if __name__ == "__main__":
-    try:
-        rec1.reconhecer()
-    except KeyboardInterrupt:
-        print("reconhecimento interrompido")

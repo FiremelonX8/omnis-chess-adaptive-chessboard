@@ -1,30 +1,62 @@
 import chess
-import reconhecimento as r
-import fuzzywuzzy as fw
+import recVosk as r
+from fuzzywuzzy import fuzz
 
 def print_board(board):
     print(board)
 
-def melhor_correspond(move, target_coordinates):
+def bestCorrespond(move, target_coordinates):
     best_match = None
     highest_ratio = 0
     for coord in target_coordinates:
-        ratio = fw.ratio(move.lower(), coord)
+        ratio = fuzz.ratio(move.lower(), coord)
         if ratio > highest_ratio:
             highest_ratio = ratio
             best_match = coord
     return best_match, highest_ratio
 
+def tirarEspaco(rec1):
+    jogada = rec1.reconhecer()
+    jogada.split(" ")
+    x = ""
+    for i in jogada:
+        x += i
+    return x.lower()
+
+def textToMove(jogConcat):
+    n = 0
+    while n < 2:
+        if jogConcat.find("um"):
+            jogConcat.replace("um", "1")
+        if jogConcat.find("dois"):
+            jogConcat.replace("dois", "2")
+        if jogConcat.find("tres") or jogConcat.find("três"):
+            jogConcat.replace("tres", "3")
+            jogConcat.replace("três", "3")
+        if jogConcat.find("quatro"):
+            jogConcat.replace("quatro", "4")
+        if jogConcat.find("cinco"):
+            jogConcat.replace("cinco", "5")
+        if jogConcat.find("seis"):
+            jogConcat.replace("seis", "6")
+        if jogConcat.find("sete"):
+            jogConcat.replace("sete", "7")
+        if jogConcat.find("oito"):
+            jogConcat.replace("oito", "8")
+        n += 1
+    return jogConcat
+        
 def main():
     # cria objeto de reconhecimento (reconhecimento.Reconhecimento())
     rec1 = r.Reconhecimento()
+    jogConcat = tirarEspaco(rec1)
+    print(jogConcat)
 
     # defines the board as the chessboard in class Board from python-chess library
     board = chess.Board()
     player_turn = "White"  # White starts the game
     print_board(board)
-    move1 = 0
-    move2 = 0
+    move = 0
     while not board.is_game_over():
         print(f"{player_turn}'s turn")
         #move = input("Enter your move in UCI format (e.g., e2e4): ")
@@ -32,11 +64,10 @@ def main():
         numeros = '12345678'
         target_coordinates = [f"{letter1}{number1}{letter2}{number2}" for letter1 in letras for number1 in numeros for letter2 in letras for number2 in numeros]
         #defines move as user's audio
-        move1 = rec1.reconhecer_audio()[0][0]
-        move2 = rec1.reconhecer_audio()[0][1]
-        move1 = melhor_correspond(move1, target_coordinates)
-        move2 = melhor_correspond(move2, target_coordinates)
-        move = move1 + move2
+        move = textToMove(jogConcat)
+        print(move)
+        move = bestCorrespond(move, target_coordinates)
+        print(move)
 
         # print(rec1.jogada_f)
         try:
