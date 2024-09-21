@@ -44,6 +44,7 @@ def main():
         move = bestCorrespond(move, targetCoord)[0]
         print(move)
         print(f"{move} é o movimento desejado? (sim ou não)")
+
         keyValid = rec1.reconhecerAudio()
         if keyValid == "não":
             pass #função para voltar e reconhecer novamente

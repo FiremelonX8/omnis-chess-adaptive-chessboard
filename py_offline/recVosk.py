@@ -8,7 +8,7 @@ audioQueue = queue.Queue()
 
 HZ = 16000 #samplerate - this model works in 16000 hertz
 DEVICE = 1 #audio DEVICE index
-CHUNK_SIZE = 128000 #audio block size
+CHUNK_SIZE = 64000 #audio block size
 CHANNELS = 1 #mono audio
 
 p = pyaudio.PyAudio()
