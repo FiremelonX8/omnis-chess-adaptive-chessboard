@@ -33,8 +33,9 @@ def main():
         numeros = '12345678'
         target_coordinates = [f"{letter1}{number1}{letter2}{number2}" for letter1 in letras for number1 in numeros for letter2 in letras for number2 in numeros]
         #defines move as user's audio
-        move1 = rec1.reconhecer_audio()[0][0]
-        move2 = rec1.reconhecer_audio()[0][1]
+        moves = rec1.reconhecer_audio()
+        move1 = moves[0][0]
+        move2 = moves[0][1]
         move1 = melhor_correspond(move1, target_coordinates)
         move2 = melhor_correspond(move2, target_coordinates)
         move = move1 + move2
