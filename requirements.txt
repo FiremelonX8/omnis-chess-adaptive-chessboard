@@ -4,5 +4,3 @@ vosk
 speechrecognition
 playsound
 pyaudio
-queue
-json
