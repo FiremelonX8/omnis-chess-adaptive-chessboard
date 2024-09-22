@@ -1,7 +1,8 @@
-y = 'e a outra pessoa era'
-jogada = y.split(" ")
-x = ''
-for i in jogada:
-    x += i
+s = "aereoaerialstresquatrocinco"
 
-print(x)
+if s.find("aereo") >= 0:
+    s = s.replace("aereo", "um")
+
+print(type(s))
+print(s.find("aereo"))
+print(s)

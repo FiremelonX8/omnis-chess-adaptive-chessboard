@@ -16,8 +16,8 @@ def bestCorrespond(move, target_coordinates):
     return best_match, highest_ratio
 
 def tirarEspaco(rec1):
-    jogada = rec1.reconhecer()
-    jogada.split(" ")
+    jogada = str(rec1.reconhecer())
+    jogada = jogada.split(" ")
     x = ""
     for i in jogada:
         x += i
@@ -26,30 +26,30 @@ def tirarEspaco(rec1):
 def textToMove(jogConcat):
     n = 0
     while n < 2:
-        if jogConcat.find("um"):
-            jogConcat.replace("um", "1")
-        if jogConcat.find("dois"):
-            jogConcat.replace("dois", "2")
-        if jogConcat.find("tres") or jogConcat.find("três"):
-            jogConcat.replace("tres", "3")
-            jogConcat.replace("três", "3")
-        if jogConcat.find("quatro"):
-            jogConcat.replace("quatro", "4")
-        if jogConcat.find("cinco"):
-            jogConcat.replace("cinco", "5")
-        if jogConcat.find("seis"):
-            jogConcat.replace("seis", "6")
-        if jogConcat.find("sete"):
-            jogConcat.replace("sete", "7")
-        if jogConcat.find("oito"):
-            jogConcat.replace("oito", "8")
+        if jogConcat.find("um") >= 0:
+            jogConcat = jogConcat.replace("um", "1")
+        if jogConcat.find("dois") >= 0:
+            jogConcat = jogConcat.replace("dois", "2")
+        if jogConcat.find("tres")>=0 or jogConcat.find("três")>=0:
+            jogConcat = jogConcat.replace("tres", "3")
+            jogConcat = jogConcat.replace("três", "3")
+        if jogConcat.find("quatro")>=0:
+            jogConcat = jogConcat.replace("quatro", "4")
+        if jogConcat.find("cinco")>=0:
+            jogConcat = jogConcat.replace("cinco", "5")
+        if jogConcat.find("seis")>=0:
+            jogConcat = jogConcat.replace("seis", "6")
+        if jogConcat.find("sete")>=0:
+            jogConcat = jogConcat.replace("sete", "7")
+        if jogConcat.find("oito")>=0:
+            jogConcat = jogConcat.replace("oito", "8")
         n += 1
     return jogConcat
         
 def main():
     # cria objeto de reconhecimento (reconhecimento.Reconhecimento())
     rec1 = r.Reconhecimento()
-    jogConcat = tirarEspaco(rec1)
+    jogConcat = str(tirarEspaco(rec1))
     print(jogConcat)
 
     # defines the board as the chessboard in class Board from python-chess library
@@ -66,7 +66,7 @@ def main():
         #defines move as user's audio
         move = textToMove(jogConcat)
         print(move)
-        move = bestCorrespond(move, target_coordinates)
+        move = bestCorrespond(move, target_coordinates)[0]
         print(move)
 
         # print(rec1.jogada_f)
