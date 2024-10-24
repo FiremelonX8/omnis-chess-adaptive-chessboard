@@ -1,5 +1,6 @@
 import speech_recognition as sr
 
+
 class Reconhecimento:
     def __init__(self):
         self.rec = sr.Recognizer()
@@ -35,7 +36,7 @@ class Reconhecimento:
                     self.jogada_f = self.validar_jogada(jogada)
                     print(self.jogada_f[0], self.jogada_f[1])
                     return self.jogada_f
-                
+
     def reconhecerAudio(self):
         with sr.Microphone() as mic:
             self.rec.adjust_for_ambient_noise(mic)
