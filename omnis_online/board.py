@@ -5,6 +5,9 @@ import time
 import smbus
 import chess
 from datetime import datetime
+from chessGame import Chess
+
+chessGame = Chess()
 
 # Configurações iniciais
 GPIO.setmode(GPIO.BCM)
@@ -17,14 +20,14 @@ MOTOR_LEFT_STEP = 40
 MOTOR_LEFT_DIR = 39
 MAGNET = 12
 
-# # Configuração do display LCD via I2C
+""" # # Configuração do display LCD via I2C
 # LCD_ADDRESS = 0x20
 # bus = smbus.SMBus(1)
 # lcd_columns = 16
-# lcd_rows = 2
+# lcd_rows = 2 """
 
 # Variáveis de controle do jogo
-game_board = chess.Board()
+game_board = chessGame.board
 sequence = "start"
 new_turn_countdown = False
 timer = datetime.now()
@@ -36,12 +39,12 @@ GPIO.setup(MOTOR_RIGHT_DIR, GPIO.OUT)
 GPIO.setup(MOTOR_LEFT_STEP, GPIO.OUT)
 GPIO.setup(MOTOR_LEFT_DIR, GPIO.OUT)
 
-# # Função de controle do LCD
+""" # # Função de controle do LCD
 # def lcd_display(line1, line2=""):
 #     print(f"LCD Line 1: {line1}")
 #     print(f"LCD Line 2: {line2}")
 #     # Aqui usaremos o I2C para escrever no LCD. O exemplo a seguir é simplificado
-#     # bus.write_byte_data(LCD_ADDRESS, 0x80, ord(line1))  # Implementar com controle específico da biblioteca do LCD
+#     # bus.write_byte_data(LCD_ADDRESS, 0x80, ord(line1))  # Implementar com controle específico da biblioteca do LCD """
 
 # Funções de controle de hardware
 
@@ -82,14 +85,15 @@ def loop():
     while not game_board.is_game_over():
         # lcd_display("Player 1" if game_board.turn else "Player 2", "Your Move")
         print(game_board)
-
-        move = input("Enter move (e.g., e2e4): ")
+        chessGame.play_game()
+        move_piece(chessGame.move)
+        """ move = input("Enter move (e.g., e2e4): ")
         if chess.Move.from_uci(move) in game_board.legal_moves:
             game_board.push(chess.Move.from_uci(move))
-            move_piece(move)
+            
             sequence = "player_black" if game_board.turn else "player_white"
         else:
-            print("Invalid move. Try again.")
+            print("Invalid move. Try again.") """
 
     # lcd_display("GAME OVER")
     GPIO.cleanup()
