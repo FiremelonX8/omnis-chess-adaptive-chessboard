@@ -34,8 +34,8 @@ def main():
         """ move = input("Enter your move in UCI format (e.g., e2e4): ") """
         letras = 'abcdefgh'
         numeros = '12345678'
-        targetCoord = [
-            f"{letter1}{number1}{letter2}{number2}" for letter1 in letras for number1 in numeros for letter2 in letras for number2 in numeros]
+        """ targetCoord = [
+            f"{letter1}{number1}{letter2}{number2}" for letter1 in letras for number1 in numeros for letter2 in letras for number2 in numeros] """
         # defines move as user's audio
         moves = rec1.reconhecerJogada()
         move1 = moves[0][0]
@@ -55,7 +55,7 @@ def main():
             print(board)
             board.push_uci(move)
         except ValueError:
-            print("Invalid move format or illegal move. Try again.")
+            print("Formato inválido ou movimento ilegal. Tente novamente")
             continue
 
         print_board(board)
