@@ -1,5 +1,5 @@
 import chess
-import reconhecimento as r
+import recognition as r
 import playsound as ps
 from fuzzywuzzy import fuzz
 
@@ -18,13 +18,14 @@ def print_board(board):
             best_match = coord
     return best_match, highest_ratio """
 
+
 class Chess:
     def __init__(self):
         self.board = chess.Board()
         self.player1 = 0
         self.player2 = 0
         self.move = 0
-    
+
     def play_game(self):
         # creates object from class reconhecimento (reconhecimento.Reconhecimento())
         rec1 = r.Reconhecimento()
@@ -69,4 +70,3 @@ class Chess:
 
         print("Fim de jogo!")
         print("Resultado: ", self.board.result())
-
