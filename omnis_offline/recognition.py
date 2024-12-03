@@ -6,7 +6,7 @@ import json
 class Reconhecimento:
     def __init__(self):
         self.audioQueue = queue.Queue()
-        self.model = vk.Model("py_offline/vosk_model_peq")
+        self.model = vk.Model("")
         self.HZ = 16000
         self.DEVICE = 1
         self.CHUNK_SIZE = 80000

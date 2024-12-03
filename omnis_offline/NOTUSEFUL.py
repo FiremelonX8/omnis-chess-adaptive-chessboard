@@ -1,5 +1,5 @@
 import chess
-import recVosk as r
+import omnis_offline.recognition as r
 from fuzzywuzzy import fuzz
 
 def print_board(board):
