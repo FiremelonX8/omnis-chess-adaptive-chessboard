@@ -1,5 +1,5 @@
 import chess
-from omnis_online.recognition import Reconhecimento
+from recognition import Reconhecimento
 
 class Chess:
     def __init__(self):
