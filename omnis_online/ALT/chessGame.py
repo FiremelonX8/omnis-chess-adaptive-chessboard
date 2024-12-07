@@ -11,7 +11,8 @@ class Chess:
         print(self.board)
 
         while not self.board.is_game_over():
-            print(f"Turno do jogador {'Branco' if self.board.turn else 'Preto'}")
+            print(
+                f"Turno do jogador {'Branco' if self.board.turn else 'Preto'}")
             moves = rec.reconhecerJogada()
             move_input = moves[0][0] + moves[0][1]
 
