@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO # type: ignore
+import RPi.GPIO as GPIO
 import time
 from datetime import datetime
 from chessGame import Chess
