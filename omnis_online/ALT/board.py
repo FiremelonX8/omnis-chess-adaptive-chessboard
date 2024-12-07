@@ -1,4 +1,4 @@
-'''import RPi.GPIO as GPIO
+import RPi.GPIO as GPIO # type: ignore
 import time
 from datetime import datetime
 from chessGame import Chess
@@ -81,4 +81,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("Encerrando...")
     finally:
-        GPIO.cleanup()'''
+        GPIO.cleanup()
