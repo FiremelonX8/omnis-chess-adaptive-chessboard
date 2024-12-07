@@ -69,8 +69,7 @@ def electromagnet(state):
     GPIO.output(MAGNET, GPIO.HIGH if state else GPIO.LOW)
     time.sleep(0.6)
 
-# Funções do Jogo
-
+#Funções do Jogo
 
 def setup():
     # lcd_display("AUTOMATIC", "CHESSBOARD")
