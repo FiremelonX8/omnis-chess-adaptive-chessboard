@@ -1,5 +1,6 @@
 import speech_recognition as sr
 
+
 class Reconhecimento:
     def __init__(self):
         self.rec = sr.Recognizer()
@@ -13,7 +14,7 @@ class Reconhecimento:
 
             '''if len(partes) == 2:
                 self.jogada_f = partes[0] + partes[1]'''
-            
+
             if len(self.jogadas_f.split()) > 1:
                 raise ValueError("Jogada incompleta.")
         except Exception as e:
@@ -27,7 +28,8 @@ class Reconhecimento:
                 print("Fale o movimento (ex: 'e2 e4'):")
                 try:
                     audio = self.rec.listen(mic, timeout=6)
-                    jogada = self.rec.recognize_google(audio, language='pt-BR').lower()
+                    jogada = self.rec.recognize_google(
+                        audio, language='pt-BR').lower()
                     jogada_valida = self.validar_jogada(jogada)
                     if jogada_valida:
                         return jogada_valida
