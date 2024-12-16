@@ -1,6 +1,7 @@
 import chess
 from recognition import Reconhecimento
 
+
 class Chess:
     def __init__(self):
         self.board = chess.Board()

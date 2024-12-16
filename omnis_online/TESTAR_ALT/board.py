@@ -3,14 +3,13 @@ import time
 from datetime import datetime
 from chessGame import Chess
 
-# Instância da lógica do jogo
 chessGame = Chess()
 
-# Configurações iniciais GPIO
+#initial config GPIO
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-# Configuração dos pinos GPIO
+#gpio pinout config
 PINS = {
     "MOTOR_RIGHT_STEP": 27,
     "MOTOR_RIGHT_DIR": 22,
@@ -22,7 +21,7 @@ PINS = {
 for pin in PINS.values():
     GPIO.setup(pin, GPIO.OUT)
 
-# Constantes para movimentação
+#moves const
 SQUARE_SIZE = 1.0  # Ajuste do tamanho de um quadrado
 DEFAULT_SPEED = 1000  # Velocidade padrão em microsegundos
 
@@ -55,23 +54,23 @@ def move_piece(move):
 
     displacement_x, displacement_y = end_x - start_x, end_y - start_y
 
-    # Movimentos de transição
+    #transition moves
     motor("T_B" if displacement_x > 0 else "B_T", DEFAULT_SPEED, abs(displacement_x))
     motor("L_R" if displacement_y > 0 else "R_L", DEFAULT_SPEED, abs(displacement_y))
-    electromagnet(True)  # Agarra a peça
+    electromagnet(True)  #grabs piece
 
-    # Movimentação final
+    #final moves
     motor("B_T" if displacement_x > 0 else "T_B", DEFAULT_SPEED, abs(displacement_x))
     motor("R_L" if displacement_y > 0 else "L_R", DEFAULT_SPEED, abs(displacement_y))
-    electromagnet(False)  # Solta a peça
+    electromagnet(False)  #releases piece
 
-# Função principal
+#main func
 if __name__ == "__main__":
     try:
-        # Calibração inicial
+        #initial calib
         calibrate()
 
-        # Lógica principal
+        #maing logic
         while not chessGame.board.is_game_over():
             print(chessGame.board)
             chessGame.play_game()
