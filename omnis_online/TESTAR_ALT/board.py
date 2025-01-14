@@ -11,10 +11,10 @@ GPIO.setwarnings(False)
 
 # gpio pinout
 PINS = {
-    "MOTOR_RIGHT_STEP": 20,
-    "MOTOR_RIGHT_DIR": 21,
-    "MOTOR_LEFT_STEP": 27,
-    "MOTOR_LEFT_DIR": 29,
+    "MOTOR_RIGHT_STEP": 27,
+    "MOTOR_RIGHT_DIR": 29,
+    "MOTOR_LEFT_STEP": 20,
+    "MOTOR_LEFT_DIR": 21,
     "MAGNET": 12
 }
 
