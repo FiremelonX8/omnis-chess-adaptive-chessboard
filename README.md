@@ -12,3 +12,5 @@ The Omnis Chess project aims to promote inclusion for people with physical disab
 EN: To test the codes developed that are fully developed, you need to access the files in omnis_chess/omnis_online/TESTAR_ALT, with the main file being board.py;
 
 PT: Para testar os códigos funcionais, você deve acessar os arquivos em omnis_chess/omnis_online/TESTAR_ALT, com board.py como arquivo principal a ser rodado.
+
+Nota: o projeto ainda está em fase de desenvolvimento
