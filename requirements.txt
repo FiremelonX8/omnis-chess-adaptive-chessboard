@@ -1,4 +1,3 @@
-fuzzywuzzy
 python-chess
 vosk
 speechrecognition
