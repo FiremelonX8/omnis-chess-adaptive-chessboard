@@ -9,46 +9,49 @@ class VoiceCommandRecognizer:
         self.qAux = queue.Queue()
         self.samplerate = samplerate
         self.model = vosk.Model(modelPath)
-        self.grammar = grammar
+
+        # Corrigir: grammar precisa ser uma string JSON se fornecida
         if grammar:
+            if isinstance(grammar, list):
+                grammar = json.dumps(grammar)
             self.recognizer = vosk.KaldiRecognizer(
-                self.model, self.samplerate, self.grammar)
+                self.model, self.samplerate, grammar)
         else:
             self.recognizer = vosk.KaldiRecognizer(self.model, self.samplerate)
 
+    def callback(self, indata, frames, time, status):
+        self.qAux.put(bytes(indata))
+
     def recognize(self):
-        while t < 1:
-            t = 1
-            try:
-                with sd.RawInputStream(samplerate=self.samplerate, blocksize=8000, dtype='int16', channels=1, callback=self.callback):
-                    print("Say 'play' to start...")
-                    while True:
-                        data = self.qAux.get()
-                        if self.recognizer.AcceptWaveform(data):
-                            result = json.loads(self.recognizer.Result())
-                            if 'text' in result:
-                                return result['text'].strip()
-                        else:
-                            partial_result = json.loads(
-                                self.recognizer.PartialResult())
-                            if 'partial' in partial_result:
-                                partial = partial_result['partial']
-                                if partial == 'play':
-                                    print("Starting...")
-                                    break
-                                else:
-                                    print(partial)
-                                return partial
-            except Exception as e:
-                print(f"Error in voice recognition: {e}")
-                t = 0
+        try:
+            with sd.RawInputStream(samplerate=self.samplerate, blocksize=8000,
+                                   dtype='int16', channels=1, callback=self.callback):
+                print("Say a command...")
+
+                while True:
+                    data = self.qAux.get()
+                    if self.recognizer.AcceptWaveform(data):
+                        result = json.loads(self.recognizer.Result())
+                        if 'text' in result:
+                            recognized = result['text'].strip()
+                            if recognized:
+                                return recognized
+                    else:
+                        partial_result = json.loads(
+                            self.recognizer.PartialResult())
+                        if 'partial' in partial_result:
+                            partial = partial_result['partial'].strip()
+                            if partial:
+                                print("Parcial:", partial)
+        except Exception as e:
+            print(f"Error in voice recognition: {e}")
+            return None
 
     def concatenate(self, textCommand):
-        acumCom = ""
-        tC = list(textCommand)
-        for i in tC:
-            if i == 'play' or i == " ":
-                tC.remove(i)
-            i.strip()
-            acumCom += i
-        return acumCom
+        if not isinstance(textCommand, str):
+            return ""
+
+        # Remove palavras indesejadas e espaços
+        words = textCommand.split()
+        filtered = [w.strip() for w in words if w.lower() != 'play']
+        return ''.join(filtered)
