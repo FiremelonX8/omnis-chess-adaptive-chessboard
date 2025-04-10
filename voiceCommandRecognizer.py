@@ -9,7 +9,7 @@ class VoiceCommandRecognizer:
         self.qAux = queue.Queue()
         self.samplerate = samplerate
         self.model = vosk.Model(modelPath)
-        self.grammar = json.loads(grammar)
+        self.grammar = grammar
         if grammar:
             self.recognizer = vosk.KaldiRecognizer(
                 self.model, self.samplerate, self.grammar)

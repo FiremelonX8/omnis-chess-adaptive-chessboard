@@ -4,3 +4,4 @@ pyaudio
 sounddevice
 json
 queue
+pyaudioportaudio19-dev
