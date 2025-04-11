@@ -25,3 +25,7 @@ class Board:
 
     def addMove(self, move):
         self.movesList.append(move)
+
+    def executePhysicalMove(self, command):
+        pass
+        # raspberry pi code logic
