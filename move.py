@@ -1,35 +1,36 @@
 from voiceCommandRecognizer import VoiceCommandRecognizer
 import json
+import chess
 
-# loading grammar
-with open("json/grammar.json", "r") as f:
-    grammar = json.load(f)  # deve ser uma lista de strings
-print("Grammar carregada:", grammar, type(grammar))
 
-with open("json/text_to_numbers.json", "r") as f:
-    textToNumbers = json.load(f)
+class Move():
+    def __init__(self, recognizedCommand):
+        self.recognizedCommand = recognizedCommand
+        self.movesList = []
 
-# initialize voice recognizer with grammar
-vRec = VoiceCommandRecognizer(
-    16000,
-    grammar,
-    "model/vosk-model-small-en-us-0.15"
-)
+    def convertTextToNumbers(concatenated, textToNumbers):
+        converted = 0
+        for key, symbol in textToNumbers.items():
+            converted = concatenated.replace(key, symbol)
+        print("CONVERTED: ", converted)
+        return converted
 
-textCommand = vRec.recognize()
-print("Recognized command:", textCommand)
+    def __str__(self):
+        return f"Move: {self.recognizedCommand}"
 
-mappedCommand = None
+    def mapCommand(self, vRec, textToNumbers):
+        mappedCommand = None
+        if len(self.recognizedCommand.strip()) > 1:
+            concatenated = vRec.concatenate(self.recognizedCommand)
+            print("Concatenated command:", concatenated)
+            mappedCommand = self.convertTextToNumbers(
+                concatenated, textToNumbers)
 
-if textCommand:
-    mappedCommand = textToNumbers.get(textCommand.strip())
+        if mappedCommand is not None:
+            print(f"Mapped command: {mappedCommand}")
+        else:
+            print("No command found")
+        return mappedCommand
 
-if not mappedCommand and len(textCommand.strip()) > 0:
-    concatenated = vRec.concatenate(textCommand)
-    print("Concatenated command:", concatenated)
-    mappedCommand = textToNumbers.get(concatenated)
-
-if mappedCommand is not None:
-    print(f"Mapped command: {mappedCommand}")
-else:
-    print("No command found")
+    def addMove(self, move):
+        self.movesList.append(move)
