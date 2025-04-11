@@ -50,8 +50,6 @@ class VoiceCommandRecognizer:
     def concatenate(self, textCommand):
         if not isinstance(textCommand, str):
             return ""
-
-        # Remove palavras indesejadas e espaços
         words = textCommand.split()
         filtered = [w.strip() for w in words if w.lower() != 'play']
         return ''.join(filtered)

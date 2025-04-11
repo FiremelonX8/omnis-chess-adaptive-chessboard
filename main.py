@@ -1,7 +1,7 @@
 import json
 from voiceCommandRecognizer import VoiceCommandRecognizer
 from board import Board
-from move import Move
+from move import TextMove
 
 with open("json/grammar.json", "r") as f:
     grammar = json.load(f)  # deve ser uma lista de strings
@@ -16,13 +16,13 @@ vRec = VoiceCommandRecognizer(
     "model/vosk-model-small-en-us-0.15"
 )
 b = Board()
-while not b.digiBoard.is_game_over():
+while not b.digiBoard.is_game_over() or not command == "stop":
     print(b.digiBoard)
     textCommand = vRec.recognize()
-    m = Move(textCommand)
+    m = TextMove(textCommand)
     command = m.mapCommand(vRec, textToNumbers)
-    b.addMove(command)
-    digiBoard = b.executeDigitalMove(command, None)
+    print(command)
+    digiBoard = b.executeDigitalMove(command)
     print("Board after move {command}: ", digiBoard)
 
 print("End of program")

@@ -1,13 +1,18 @@
-class Move():
+class TextMove():
     def __init__(self, recognizedCommand):
         self.recognizedCommand = recognizedCommand
 
-    def convertTextToNumbers(concatenated, textToNumbers):
-        converted = 0
-        for key, symbol in textToNumbers.items():
-            converted = concatenated.replace(key, symbol)
-        print("CONVERTED: ", converted)
-        return converted
+    def convertTextToNumbers(self, concatenated, textToNumbers):
+        try:
+            converted = concatenated
+            for key, symbol in textToNumbers.items():
+                converted = converted.replace(key, symbol)
+            if len(converted) != 4:  # Chess moves are 4 characters
+                return None
+            return converted
+        except Exception as e:
+            print(f"Conversion error: {e}")
+            return None
 
     def __str__(self):
         return f"Move: {self.recognizedCommand}"
