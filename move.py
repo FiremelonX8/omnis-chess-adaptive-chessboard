@@ -1,12 +1,6 @@
-from voiceCommandRecognizer import VoiceCommandRecognizer
-import json
-import chess
-
-
 class Move():
     def __init__(self, recognizedCommand):
         self.recognizedCommand = recognizedCommand
-        self.movesList = []
 
     def convertTextToNumbers(concatenated, textToNumbers):
         converted = 0
@@ -31,6 +25,3 @@ class Move():
         else:
             print("No command found")
         return mappedCommand
-
-    def addMove(self, move):
-        self.movesList.append(move)
