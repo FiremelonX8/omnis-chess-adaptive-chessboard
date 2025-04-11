@@ -1,17 +1,18 @@
 import chess
 
+
 class Board:
     def __init__(self):
-        self.board = chess.Board()
+        self.digiBoard = chess.Board()
         self.movesList = []
-    
-    def executeDigitalMove(self, command, board):
+
+    def executeDigitalMove(self, command):
         if self.movesList:
             move = command
             try:
                 chessMove = chess.Move.from_uci(move)
-                if chessMove in board.legal_moves:
-                    board.push(chessMove)
+                if chessMove in self.digiBoard.legal_moves:
+                    self.digiBoard.push(chessMove)
                     print(f"Move executed: {move}")
                 else:
                     print(f"Illegal move: {move}")
@@ -19,7 +20,7 @@ class Board:
                 print(f"Invalid move format: {move}")
         else:
             print("No moves to execute")
-        return board
-    
+        return self.digiBoard
+
     def addMove(self, move):
         self.movesList.append(move)

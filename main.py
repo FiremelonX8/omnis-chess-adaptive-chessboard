@@ -16,13 +16,13 @@ vRec = VoiceCommandRecognizer(
     "model/vosk-model-small-en-us-0.15"
 )
 b = Board()
-while True:
+while not b.digiBoard.is_game_over():
+    print(b.digiBoard)
     textCommand = vRec.recognize()
     m = Move(textCommand)
     command = m.mapCommand(vRec, textToNumbers)
     b.addMove(command)
-    board = b.executeDigitalMove(command, None)
+    digiBoard = b.executeDigitalMove(command, None)
+    print("Board after move {command}: ", digiBoard)
 
-    print("Board after move {command}: ", board)
-
-print("Game ended")
+print("End of program")
