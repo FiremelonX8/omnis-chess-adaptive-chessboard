@@ -1,7 +1,8 @@
-python-chess
-vosk
-pyaudio
-sounddevice
+python-chess==1.999
+chess==1.11.2
+vosk==0.3.45
+pyaudio==0.2.14
+sounddevice==0.5.1
 json
 queue
 pyaudioportaudio19-dev
